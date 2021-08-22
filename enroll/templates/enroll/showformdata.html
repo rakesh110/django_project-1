@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>employee data</title>
+ <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css' %}">
+
+ <style>
+  table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+th, td {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+ </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light col-sm-10 offset-1">
+    <a class="navbar-brand" href="{% url 'showformdata' %}"><h2>Employee Data</h2></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link btn btn-info" href="{% url 'home'%}" class="btn btn-info">Back to Home <span class="sr-only">(current)</span></a>
+        </li><br><br>
+        
+      </ul>
+      <br>
+    </div>
+  </nav>  <!---###Filter form data--->
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+
+			<form method="get" novalidate>
+        {{filter.form}}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+
+		</div>
+	</div>
+	
+</div>
+<br>
+<!----##Show form data in template---->
+  {% if stu %}
+   <table class="table table-hover">
+     <thead>
+       <tr>
+        <th>Id</th>
+        <th>Serial No</th>
+        <th>Date</th>
+        <th>Employee Name</th>
+        <th>Father Name</th>
+        <th>Gender</th>
+        <th>Residence</th>
+        <th>Date of Birth</th>
+        <th>Physical Fitness</th>
+        <th>Descriptive Marks</th>
+        <th>Refusel_of_certificate</th>
+        <th>Certificate_being_revoked</th>
+        <th>Age</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Factory</th>
+        <th>Department</th>
+        <th>Examination after a Period</th>
+       </tr>
+     </thead>
+     <tbody>
+      {% for st in stu %}
+       <tr>
+        <td>{{st.id}}</td>
+        <td>{{st.serial_no}}</td>
+        <td>{{st.date}}</td>
+        <td>{{st.employee_name}}</td>
+        <td>{{st.father_name}}</td>
+        <td>{{st.gender}}</td>
+        <td>{{st.residence}}</td>
+        <td>{{st.dob}}</td>
+        <td>{{st.physical_fitness}}</td>
+        <td>{{st.descriptive_marks}}</td>
+        <td>{{st.refusel_of_certificate}}</td>
+        <td>{{st.certificate_being_revoked}}</td>
+        <td>{{st.age}}</td>
+        <td>{{st.telephone}}</td>
+        <td>{{st.email}}</td>
+        <td>{{st.factory}}</td>
+        <td>{{st.department}}</td>
+        <td>{{st.examination_after_a_period}}</td>
+        
+       </tr>
+      {% endfor %}
+     </tbody>
+   </table>
+   <a href="{% url 'export-excel'%}" class="btn btn-info">export-excel</a>
+
+  {% else %}
+   <h4 class="text-center alert alert-warning">No Records</h4>
+  {% endif %}
+ </div>
+ <script src="{% static 'enroll/js/jquery.js' %}"></script>
+ <script src="{% static 'enroll/js/popper.js' %}"></script>
+ <script src="{% static 'enroll/js/bootstrap.js' %}"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+</html>
